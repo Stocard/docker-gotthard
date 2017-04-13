@@ -6,4 +6,4 @@ for PORT in "${PORTS[@]}"; do
   FORWARDING_CONFIG="${FORWARDING_CONFIG} -L 0.0.0.0:${PORT}:${HOST}:${PORT}"
 done
 
-exec ssh -v -T -N -oStrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${HOST}
+exec ssh -T -N -oStrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${HOST}
