@@ -15,7 +15,7 @@ docker run \
   -p 8081:8081 \
   -e USER=florian \
   -e HOST=example.org \
-  -e PORTS=8080,8081  \
+  -e PORTS=80:8080,81:8081  \
   gotthard
 ```
 
@@ -25,16 +25,12 @@ services:
   (...)
   gotthard:
     image: fbarth/gotthard
-    ports:
-      - 8080:8080
-      - 8081:8081
     environment: 
       - USER=user
       - HOST=example.org
-      - PORTS=8080,8081
+      - PORTS=80:8080,81:8081
     volumes:
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
 ```
 
-Your containers can now use `gotthard:8080` or `gotthard:8081` to talk to the remote server.
-
+Your containers can now use `gotthard:80` or `gotthard:81` to talk to the remote server.
