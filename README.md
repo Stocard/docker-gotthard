@@ -24,7 +24,7 @@ docker run \
 services:
   (...)
   gotthard:
-    image: gotthard
+    image: fbarth/gotthard
     ports:
       - 8080:8080
       - 8081:8081
@@ -33,7 +33,7 @@ services:
       - HOST=example.org
       - PORTS=8080,8081
     volumes:
-      - ~/.ssh/:/root/.ssh/
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
 ```
 
 Your containers can now use `gotthard:8080` or `gotthard:8081` to talk to the remote server.
