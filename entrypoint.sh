@@ -1,4 +1,4 @@
-set -ex
+set -e
 
 FORWARDING_CONFIG=""
 IFS=',' read -r -a PORTMAPPINGS <<< "${PORTS}"
