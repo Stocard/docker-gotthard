@@ -4,8 +4,9 @@ services:
 script:
 - docker build -t stocard/gotthard:$TRAVIS_COMMIT .
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  docker push stocard/gotthard:$TRAVIS_COMMIT; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then 
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/gotthard:$TRAVIS_COMMIT; 
+  fi
 env:
   global:
   - secure: kJoFv/iQdHso3trzGzFmxTCfNCsJ2baOxD+2PR0WiAglql0r+7+NhlHuEU2qg/d5yc3TlMS0TgPazAqWzbR/y1vIKHWfyv76LAiYEMlpvkQUcIh+IkXDnzTVmOrVOQrL4U10gV2ogVDasYPAl2dxVG90q3rEXwWEhjOxbQXEU7O4F4eF/YsJx+CRsGP++H853P4OhEgBzTyYWHa7MS0p4F5R17PeNVBeUivtQy27WACcXDsxfmvZF7PxmjTj2+PeH4iSOMOuRY3OIbMM068ywqPEi8+rSIcQfr5S4KA7oyZDAgus9j2wOtEZRr8achnE3yvoQzjnjrxgbBl1VVEXctVJ9fKXvEDj21LrtlIXxc1/ldemO37Pxt0z7ZcNDNgo3Lxh3fR/jlz9C0oGhvxJMmW2nSo2mPb+MHB+O0ik5Yr9ZZYABsHQAEqRQQrVbTsLVgFB8cMfZQ9Gnr8nz+Nv9eePfQnlO+/hUXtK2kTDD5Cqslust2OPkzN03wKw3CQhtwUaiNY+0YmqI+virVGaLSmPEriBvcPFHzTrO+hj2Zv/N303DUqNnl8okrxyODNbqGf1mgvjYMgCxxHncD5hfEyqJ/c/kh68SEpVZg6WkBp34cMBPuvJ/bM4yCY8k7450ITmXymePMCP3NpyzA3z0eECixhvKKfaV4OfSF8YbOw=
