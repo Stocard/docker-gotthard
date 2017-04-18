@@ -3,6 +3,8 @@ services:
 - docker
 script:
 - docker build -t stocard/gotthard:$TRAVIS_COMMIT .
+- docker tag stocard/gotthard:$TRAVIS_COMMIT stocard/gotthard:latest
+
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then 
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/gotthard:$TRAVIS_COMMIT && docker push stocard/gotthard:latest; 
