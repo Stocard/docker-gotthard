@@ -2,7 +2,7 @@ sudo: required
 services:
 - docker
 script:
-- docker build -t stocard/gotthard:$TRAVIS_COMMIT
+- docker build -t stocard/gotthard:$TRAVIS_COMMIT .
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push USER/REPO; fi
