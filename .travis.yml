@@ -5,7 +5,7 @@ script:
 - docker build -t stocard/gotthard:$TRAVIS_COMMIT .
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then 
-  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/gotthard:$TRAVIS_COMMIT; 
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push stocard/gotthard:$TRAVIS_COMMIT && docker push stocard/gotthard:latest; 
   fi
 env:
   global:
