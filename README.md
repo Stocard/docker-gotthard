@@ -16,7 +16,7 @@ docker run \
   -e USER=florian \
   -e HOST=example.org \
   -e PORTS=80:8080,81:8081  \
-  gotthard
+  stocard/gotthard
 ```
 
 ### docker-compose:
@@ -24,7 +24,7 @@ docker run \
 services:
   (...)
   gotthard:
-    image: fbarth/gotthard
+    image: stocard/gotthard
     environment: 
       - USER=user
       - HOST=example.org
