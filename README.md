@@ -14,6 +14,7 @@ docker run \
   -p 8080:8080 \
   -p 8081:8081 \
   -e USER=florian \
+  -e JUMP_HOST=my.jumphost.example.org
   -e HOST=example.org \
   -e PORTS=80:8080,81:8081  \
   stocard/gotthard
@@ -28,6 +29,7 @@ services:
     environment: 
       - USER=user
       - HOST=example.org
+      - JUMP_HOST=my.jump_host.example.org
       - PORTS=80:8080,81:8081
     volumes:
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
