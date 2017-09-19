@@ -1,5 +1,10 @@
 set -e
-JUMP_HOST=${JUMP_HOST:-$HOST}
+
+if [ -z "$JUMP_HOST" ]; then
+  JUMP_HOST="$HOST"
+else
+  JUMP_HOST="-J $JUMP_HOST $HOST"
+fi
 
 FORWARDING_CONFIG=""
 IFS=',' read -r -a PORTMAPPINGS <<< "${PORTS}"
