@@ -3,7 +3,7 @@ set -e
 if [ -z "$JUMP_HOST" ]; then
   JUMP_HOST="$HOST"
 else
-  JUMP_HOST="-J $JUMP_HOST $HOST"
+  JUMP_HOST="-J $USER@$JUMP_HOST $HOST"
 fi
 
 FORWARDING_CONFIG=""
