@@ -1,12 +1,11 @@
 # Gotthard
 
 A container that exposes remote ports to your containers via ssh local forwarding.
+The container will try to use all files that start with `id_` as private keys.
 
-
-It is also possible to use a jump host:
-
-* Specify the jump host via `JUMP_HOST`
-* (Optional): Specify a jump user via `JUMP_USER`
+It is also possible to use a jump hosts:
+* Specify these the following way: `JUMP_USER@JUMP_HOST`
+* You can also specifiy multiple comma-seperated jump-hosts: `JUMP_USER1@JUMP_HOST1,JUMP_USER2@JUMP_HOST2`
 
 ## Examples
 
@@ -19,7 +18,7 @@ docker run \
   -p 8080:8080 \
   -p 8081:8081 \
   -e USER=florian \
-  -e JUMP_HOST=my.jumphost.example.org
+  -e JUMP_HOSTS=user1@my.jumphost.example.org,user3@my.other.jumphost.example.org
   -e HOST=example.org \
   -e PORTS=80:8080,81:8081  \
   stocard/gotthard
@@ -34,8 +33,7 @@ services:
     environment: 
       - USER=user
       - HOST=example.org
-      - JUMP_HOST=my.jump_host.example.org
-      - JUMP_USER=jump_user
+      - JUMP_HOSTS=my.jump_host.example.org
       - PORTS=80:8080,81:8081
     volumes:
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
