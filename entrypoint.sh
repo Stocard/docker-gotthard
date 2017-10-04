@@ -2,11 +2,15 @@ set -e
 
 eval "$(ssh-agent -s)" &> /dev/null
 
-for possiblekey in ${HOME}/.ssh/id_*; do
+for possiblekey in ${HOME}/.ssh/*; do
     if grep -q PRIVATE "$possiblekey"; then
         ssh-add "$possiblekey" &> /dev/null
     fi
 done
+
+# ssh-add -l will return with non-zero exit code if empty, thus terminating script execution
+echo "Checking if we added any ssh identities (aborting if not)"
+ssh-add -l
 
 if [ -z "$JUMP_HOSTS" ]; then
   JUMP_CONFIG=""
@@ -21,4 +25,4 @@ for PORTMAPPING in "${PORTMAPPINGS[@]}"; do
   FORWARDING_CONFIG="${FORWARDING_CONFIG} -L 0.0.0.0:${PORTS[0]}:${HOST}:${PORTS[1]}"
 done
 
-exec ssh -T -N -oServerAliveInterval=30 -oStrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${JUMP_CONFIG} ${HOST} 
+exec ssh -N -T -o StrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${JUMP_CONFIG} ${HOST} 

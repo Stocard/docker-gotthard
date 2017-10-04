@@ -1,11 +1,13 @@
 # Gotthard
 
 A container that exposes remote ports to your containers via ssh local forwarding.
-The container will try to use all files that start with `id_` as private keys.
+The container will try to use all files in the **folder** that is mounted on `/root/.ssh/` to authenticate. 
+Mounting single files, will not work, as docker volume mounting only works on folders.
 
-It is also possible to use a jump hosts:
-* Specify these the following way: `JUMP_USER@JUMP_HOST`
-* You can also specifiy multiple comma-seperated jump-hosts: `JUMP_USER1@JUMP_HOST1,JUMP_USER2@JUMP_HOST2`
+It is also possible to use jump hosts:
+* Specify the desired jump host(s) the following way (as value of `JUMP_HOSTS`): 
+  * `JUMP_USER@JUMP_HOST`
+  * `JUMP_USER1@JUMP_HOST1,JUMP_USER2@JUMP_HOST2`
 
 ## Examples
 
@@ -33,10 +35,10 @@ services:
     environment: 
       - USER=user
       - HOST=example.org
-      - JUMP_HOSTS=my.jump_host.example.org
+      - JUMP_HOSTS=user@my.jump_host.example.org
       - PORTS=80:8080,81:8081
     volumes:
-      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      - ~/.ssh/:/root/.ssh/
 ```
 
 Your containers can now use `gotthard:80` or `gotthard:81` to talk to the remote server.
