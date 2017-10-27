@@ -25,4 +25,4 @@ for PORTMAPPING in "${PORTMAPPINGS[@]}"; do
   FORWARDING_CONFIG="${FORWARDING_CONFIG} -L 0.0.0.0:${PORTS[0]}:${HOST}:${PORTS[1]}"
 done
 
-exec ssh -N -T -o StrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${JUMP_CONFIG} ${HOST} 
+exec ssh -N -T -oServerAliveInterval=30 -oStrictHostKeyChecking=no ${FORWARDING_CONFIG} -l ${USER} ${JUMP_CONFIG} ${HOST} 
