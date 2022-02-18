@@ -4,6 +4,8 @@ A container that exposes remote ports to your containers via ssh local forwardin
 The container will try to use all files in the **folder** that is mounted on `/root/.ssh/` to authenticate. 
 Mounting single files, will not work, as docker volume mounting only works on folders.
 
+:warning: If your SSH key requires a passphrase, please specify it using `SSH_KEY_PASSPHRASE` environment variable.
+
 It is also possible to use jump hosts:
 * Specify the desired jump host(s) the following way (as value of `JUMP_HOSTS`): 
   * `JUMP_USER@JUMP_HOST`
